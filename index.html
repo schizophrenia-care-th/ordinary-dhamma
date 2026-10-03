@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ธรรมะ•ดา | ธรรมะเรียบง่าย ในชีวิตประจำวัน</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Sarabun & Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cream: {
+                            50: '#FAF8F5',
+                            100: '#F5F0EB',
+                            200: '#E8DFD5',
+                        },
+                        sage: {
+                            50: '#F2F6F4',
+                            100: '#E1EBE5',
+                            500: '#5B8266',
+                            600: '#466650',
+                            800: '#2C4233',
+                            900: '#1D2D23',
+                        },
+                        amber: {
+                            500: '#D97706',
+                            600: '#B45309',
+                        },
+                        warmdark: {
+                            800: '#1F1E1C',
+                            900: '#141312',
+                        }
+                    },
+                    fontFamily: {
+                        prompt: ['Prompt', 'sans-serif'],
+                        sarabun: ['Sarabun', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Prompt', sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F0EB;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #141312;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C2B69D;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #466650;
+            border-radius: 4px;
+        }
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .dark .glass-panel {
+            background: rgba(31, 30, 28, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-cream-50 text-stone-800 dark:bg-warmdark-900 dark:text-stone-200 min-h-screen flex flex-col selection:bg-sage-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-panel shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full bg-sage-500 text-white flex items-center justify-center font-heading font-bold text-xl shadow-md group-hover:scale-105 transition-transform duration-300">
+                    ธ
+                </div>
+                <div>
+                    <span class="text-xl font-bold font-heading text-sage-800 dark:text-sage-100 tracking-wide block leading-tight">ธรรมะ•ดา</span>
+                    <span class="text-xs text-stone-500 dark:text-stone-400 font-normal block">Ordinary Dhamma</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#home" class="hover:text-sage-600 dark:hover:text-sage-500 transition-colors py-1 border-b-2 border-transparent hover:border-sage-500">หน้าแรก</a>
+                <a href="#quotes" class="hover:text-sage-600 dark:hover:text-sage-500 transition-colors py-1 border-b-2 border-transparent hover:border-sage-500">ข้อคิดธรรมะ</a>
+                <a href="#journal" class="hover:text-sage-600 dark:hover:text-sage-500 transition-colors py-1 border-b-2 border-transparent hover:border-sage-500">บันทึกสติ</a>
+                <a href="#articles" class="hover:text-sage-600 dark:hover:text-sage-500 transition-colors py-1 border-b-2 border-transparent hover:border-sage-500">บทความ</a>
+                <a href="#contact" class="hover:text-sage-600 dark:hover:text-sage-500 transition-colors py-1 border-b-2 border-transparent hover:border-sage-500">ติดตามเรา</a>
+            </nav>
+
+            <!-- Actions & Theme Switcher -->
+            <div class="flex items-center space-x-3">
+                <button id="themeToggle" class="p-2.5 rounded-full hover:bg-stone-200 dark:hover:bg-warmdark-800 text-stone-600 dark:text-stone-300 transition-colors" title="เปลี่ยนโหมดการอ่าน">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+                <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center space-x-2 bg-sage-600 hover:bg-sage-500 text-white px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all shadow-sm hover:shadow-md">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>เพจ Facebook</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-stone-600 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-warmdark-800 focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-cream-50 dark:bg-warmdark-900 border-b border-stone-200 dark:border-stone-800">
+            <a href="#home" class="block py-2 text-stone-700 dark:text-stone-300 hover:text-sage-600 font-medium">หน้าแรก</a>
+            <a href="#quotes" class="block py-2 text-stone-700 dark:text-stone-300 hover:text-sage-600 font-medium">ข้อคิดธรรมะ</a>
+            <a href="#journal" class="block py-2 text-stone-700 dark:text-stone-300 hover:text-sage-600 font-medium">บันทึกสติประจำวัน</a>
+            <a href="#articles" class="block py-2 text-stone-700 dark:text-stone-300 hover:text-sage-600 font-medium">บทความ</a>
+            <a href="#contact" class="block py-2 text-stone-700 dark:text-stone-300 hover:text-sage-600 font-medium">ติดตามเรา</a>
+            <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" class="w-full text-center block bg-sage-600 text-white py-2.5 rounded-full text-sm font-medium">
+                <i class="fa-brands fa-facebook mr-2"></i> ไปยัง Facebook เพจ ธรรมะ•ดา
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section id="home" class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-cream-100 to-cream-50 dark:from-warmdark-800 dark:to-warmdark-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-sage-100 dark:bg-sage-900/50 text-sage-800 dark:text-sage-100 text-xs font-medium border border-sage-500/20">
+                            <span class="w-2 h-2 rounded-full bg-sage-500 animate-ping"></span>
+                            <span>ธรรมะเรียบง่าย ในชีวิตประจำวัน</span>
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-stone-900 dark:text-stone-100 tracking-tight leading-tight">
+                            ค้นพบความสงบในใจ <br class="hidden sm:inline">
+                            <span class="text-sage-600 dark:text-sage-500 font-light">ผ่านสิ่งธรรมดาๆ รอบตัวคุณ</span>
+                        </h1>
+                        <p class="text-stone-600 dark:text-stone-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            ยินดีต้อนรับสู่พื้นที่แห่งการเติมพลังใจและเจริญสติ เพจ <strong class="text-sage-800 dark:text-sage-100">ธรรมะ•ดา</strong> รวบรวมข้อคิดธรรมะประยุกต์ บทความเพื่อจิตใจ และบันทึกสติประจำวัน เพื่อให้คุณเบากาย สบายใจ ในทุกๆ วัน
+                        </p>
+                        
+                        <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" class="px-6 py-3 bg-sage-600 hover:bg-sage-500 text-white font-medium rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2">
+                                <i class="fa-brands fa-facebook text-lg"></i>
+                                <span>ติดตามเพจ Facebook</span>
+                            </a>
+                            <a href="#quotes" class="px-6 py-3 bg-stone-200 dark:bg-warmdark-800 hover:bg-stone-300 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 font-medium rounded-full transition-all duration-300 flex items-center space-x-2">
+                                <i class="fa-solid fa-book-open text-sage-600"></i>
+                                <span>อ่านข้อคิดธรรมะ</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Daily Quote Interactive Generator Banner -->
+                    <div class="lg:col-span-5">
+                        <div class="glass-panel p-8 rounded-3xl shadow-xl relative overflow-hidden border border-stone-200 dark:border-stone-800">
+                            <div class="flex items-center justify-between mb-6">
+                                <span class="text-xs uppercase tracking-wider font-semibold text-amber-600 dark:text-amber-500 flex items-center gap-1.5">
+                                    <i class="fa-regular fa-sun"></i> ข้อคิดสะกิดใจวันนี้
+                                </span>
+                                <span class="text-xs text-stone-400" id="quoteDate">--/--/----</span>
+                            </div>
+
+                            <div id="quoteContainer" class="min-h-[160px] flex flex-col justify-center transition-opacity duration-300">
+                                <blockquote class="text-lg sm:text-xl font-heading text-stone-800 dark:text-stone-100 font-medium leading-relaxed italic mb-4">
+                                    "สิ่งที่เกิดขึ้นแล้วดีเสมอ ไม่ใช่เพราะมันตรงใจเรา แต่เพราะมันมาเพื่อให้เราได้เรียนรู้และเติบโต"
+                                </blockquote>
+                                <p id="quoteAuthor" class="text-sm text-sage-600 dark:text-sage-500 font-medium text-right">
+                                    — ธรรมะ•ดา
+                                </p>
+                            </div>
+
+                            <div class="mt-8 pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
+                                <button id="btnRandomQuote" class="text-xs sm:text-sm bg-sage-100 dark:bg-sage-900/60 hover:bg-sage-200 dark:hover:bg-sage-800 text-sage-800 dark:text-sage-100 px-4 py-2 rounded-full font-medium transition-colors flex items-center space-x-2">
+                                    <i class="fa-solid fa-rotate-right text-xs"></i>
+                                    <span>สุ่มข้อคิดใหม่</span>
+                                </button>
+
+                                <div class="flex items-center space-x-2">
+                                    <button id="btnCopyHeroQuote" class="p-2 text-stone-500 hover:text-sage-600 dark:hover:text-sage-400 transition-colors" title="คัดลอกข้อความ">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                    <button id="btnShareHeroQuote" class="p-2 text-stone-500 hover:text-sage-600 dark:hover:text-sage-400 transition-colors" title="แชร์ข้อความ">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Filterable Dhamma Quotes Section -->
+        <section id="quotes" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold font-heading text-stone-900 dark:text-stone-100">ข้อคิดเตือนใจประจำวัน</h2>
+                <p class="text-stone-600 dark:text-stone-400 mt-2 text-sm sm:text-base">เลือกหมวดหมู่ข้อคิดที่ตรงกับสภาวะใจของคุณในขณะนี้</p>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10" id="quoteCategories">
+                <button data-category="all" class="quote-cat-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-sage-600 text-white shadow-sm">
+                    ทั้งหมด
+                </button>
+                <button data-category="happiness" class="quote-cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-stone-200 dark:bg-warmdark-800 text-stone-700 dark:text-stone-300 hover:bg-sage-100">
+                    ความสุข
+                </button>
+                <button data-category="lettinggo" class="quote-cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-stone-200 dark:bg-warmdark-800 text-stone-700 dark:text-stone-300 hover:bg-sage-100">
+                    การปล่อยวาง
+                </button>
+                <button data-category="mindfulness" class="quote-cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-stone-200 dark:bg-warmdark-800 text-stone-700 dark:text-stone-300 hover:bg-sage-100">
+                    สติในชีวิตประจำวัน
+                </button>
+                <button data-category="suffering" class="quote-cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-stone-200 dark:bg-warmdark-800 text-stone-700 dark:text-stone-300 hover:bg-sage-100">
+                    รับมือความทุกข์
+                </button>
+            </div>
+
+            <!-- Quotes Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="quotesGrid">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- Daily Mindfulness Tracker Section -->
+        <section id="journal" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-sage-50 to-cream-100 dark:from-warmdark-800 dark:to-warmdark-900 rounded-3xl p-6 sm:p-10 border border-stone-200 dark:border-stone-800 shadow-sm">
+                
+                <div class="max-w-3xl mx-auto text-center mb-10">
+                    <span class="text-xs font-semibold text-sage-600 dark:text-sage-400 tracking-widest uppercase">Mindfulness Journal</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-heading text-stone-900 dark:text-stone-100 mt-1">บันทึกสติประจำวัน</h2>
+                    <p class="text-stone-600 dark:text-stone-400 text-sm mt-2">
+                        การรู้ทันอารมณ์และเช็คลิสต์การฝึกสติสั้นๆ ช่วยสร้างนิสัยแห่งความสงบในจิตใจ (ข้อมูลบันทึกในอุปกรณ์ของคุณ)
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Left: Mood & Mind State Check-in -->
+                    <div class="space-y-6 bg-white dark:bg-warmdark-900 p-6 rounded-2xl shadow-sm border border-stone-200 dark:border-stone-800">
+                        <h3 class="text-base font-bold font-heading text-stone-800 dark:text-stone-200 flex items-center gap-2">
+                            <i class="fa-regular fa-face-smile text-amber-500"></i> สภาวะจิตใจวันนี้ของคุณเป็นอย่างไร?
+                        </h3>
+
+                        <div class="grid grid-cols-4 gap-2 text-center" id="moodSelector">
+                            <button data-mood="สงบ" class="mood-btn p-3 rounded-xl border border-stone-200 dark:border-stone-700 hover:border-sage-500 transition-all flex flex-col items-center">
+                                <span class="text-2xl mb-1">🧘‍♂️</span>
+                                <span class="text-xs font-medium text-stone-600 dark:text-stone-300">สงบ</span>
+                            </button>
+                            <button data-mood="สดใส" class="mood-btn p-3 rounded-xl border border-stone-200 dark:border-stone-700 hover:border-sage-500 transition-all flex flex-col items-center">
+                                <span class="text-2xl mb-1">😊</span>
+                                <span class="text-xs font-medium text-stone-600 dark:text-stone-300">สดใส</span>
+                            </button>
+                            <button data-mood="เหนื่อยล้า" class="mood-btn p-3 rounded-xl border border-stone-200 dark:border-stone-700 hover:border-sage-500 transition-all flex flex-col items-center">
+                                <span class="text-2xl mb-1">😮‍💨</span>
+                                <span class="text-xs font-medium text-stone-600 dark:text-stone-300">เหนื่อยล้า</span>
+                            </button>
+                            <button data-mood="ว้าวุ่น" class="mood-btn p-3 rounded-xl border border-stone-200 dark:border-stone-700 hover:border-sage-500 transition-all flex flex-col items-center">
+                                <span class="text-2xl mb-1">🌊</span>
+                                <span class="text-xs font-medium text-stone-600 dark:text-stone-300">ว้าวุ่น</span>
+                            </button>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-stone-600 dark:text-stone-400 mb-2">ตั้งเจตนาดีๆ ของวันนี้ (Daily Intention)</label>
+                            <input type="text" id="intentionInput" placeholder="เช่น 'วันนี้จะพูดจาไพเราะและยิ้มให้ตัวเอง'" class="w-full px-4 py-2.5 rounded-xl border border-stone-200 dark:border-stone-700 dark:bg-warmdark-800 text-sm focus:outline-none focus:ring-2 focus:ring-sage-500">
+                        </div>
+
+                        <button id="btnSaveJournal" class="w-full bg-sage-600 hover:bg-sage-500 text-white font-medium py-2.5 rounded-xl text-sm transition-colors shadow-sm">
+                            บันทึกสภาวะจิตใจ
+                        </button>
+                    </div>
+
+                    <!-- Right: Mindfulness Habits Checklist -->
+                    <div class="space-y-4 bg-white dark:bg-warmdark-900 p-6 rounded-2xl shadow-sm border border-stone-200 dark:border-stone-800 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-base font-bold font-heading text-stone-800 dark:text-stone-200 flex items-center gap-2">
+                                    <i class="fa-solid fa-check-double text-sage-500"></i> เช็คลิสต์ฝึกสติวันนี้
+                                </h3>
+                                <span id="streakBadge" class="text-xs px-2.5 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold rounded-full border border-amber-500/20">
+                                    🔥 ต่อเนื่อง 1 วัน
+                                </span>
+                            </div>
+
+                            <div class="space-y-3" id="habitsList">
+                                <label class="flex items-center space-x-3 p-3 rounded-xl hover:bg-stone-50 dark:hover:bg-warmdark-800 cursor-pointer transition-colors border border-stone-100 dark:border-stone-800">
+                                    <input type="checkbox" class="habit-check w-4 h-4 text-sage-600 rounded accent-sage-600">
+                                    <span class="text-sm text-stone-700 dark:text-stone-300">สวดมนต์สั้นๆ หรือ นั่งสมาธิ 5-10 นาที</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl hover:bg-stone-50 dark:hover:bg-warmdark-800 cursor-pointer transition-colors border border-stone-100 dark:border-stone-800">
+                                    <input type="checkbox" class="habit-check w-4 h-4 text-sage-600 rounded accent-sage-600">
+                                    <span class="text-sm text-stone-700 dark:text-stone-300">รู้ทันลมหายใจระหว่างวันอย่างน้อย 3 ครั้ง</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl hover:bg-stone-50 dark:hover:bg-warmdark-800 cursor-pointer transition-colors border border-stone-100 dark:border-stone-800">
+                                    <input type="checkbox" class="habit-check w-4 h-4 text-sage-600 rounded accent-sage-600">
+                                    <span class="text-sm text-stone-700 dark:text-stone-300">กล่าวคำว่า "ขอบคุณ" เรื่องดีๆ ในชีวิต</span>
+                                </label>
+                                <label class="flex items-center space-x-3 p-3 rounded-xl hover:bg-stone-50 dark:hover:bg-warmdark-800 cursor-pointer transition-colors border border-stone-100 dark:border-stone-800">
+                                    <input type="checkbox" class="habit-check w-4 h-4 text-sage-600 rounded accent-sage-600">
+                                    <span class="text-sm text-stone-700 dark:text-stone-300">ละเว้นการใช้วาจาหรือความคิดลบ</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="journalSavedMsg" class="hidden text-center text-xs text-sage-600 dark:text-sage-400 font-medium pt-2">
+                            ✓ บันทึกข้อมูลประจำวันเรียบร้อยแล้ว
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Articles Section -->
+        <section id="articles" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-semibold text-sage-600 dark:text-sage-400 tracking-wider uppercase">Dhamma Reading</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-heading text-stone-900 dark:text-stone-100 mt-1">บทความธรรมะน่าอ่าน</h2>
+                </div>
+                <div class="w-full md:w-72">
+                    <div class="relative">
+                        <input type="text" id="articleSearch" placeholder="ค้นหาบทความ..." class="w-full pl-9 pr-4 py-2 rounded-full border border-stone-300 dark:border-stone-700 dark:bg-warmdark-800 text-sm focus:outline-none focus:ring-2 focus:ring-sage-500">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-stone-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="articlesGrid">
+                <article class="article-card bg-white dark:bg-warmdark-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-stone-200 dark:border-stone-800 flex flex-col">
+                    <div class="h-48 bg-stone-200 dark:bg-stone-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Nature" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/5B8266/FFFFFF?text=ธรรมะ•ดา'">
+                        <span class="absolute top-3 left-3 bg-sage-600 text-white text-xs px-2.5 py-1 rounded-full font-medium">ธรรมะประยุกต์</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="text-lg font-bold font-heading text-stone-900 dark:text-stone-100 hover:text-sage-600 transition-colors line-clamp-2">
+                                เมื่อมนุษย์เลิกกลัวธรรมชาติ : จากเรื่องเหนือจริงสู่ความจริงธรรมดา
+                            </h3>
+                            <p class="text-stone-600 dark:text-stone-400 text-xs sm:text-sm mt-2 line-clamp-3">
+                                ทำความเข้าใจธรรมชาติและความเป็นจริงของชีวิต เมื่อเรายอมรับกฎไตรลักษณ์ ความกลัวและความว้าวุ่นจะค่อยๆ เปลี่ยนเป็นความสงบอย่างแท้จริง
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs text-stone-400">
+                            <span><i class="fa-regular fa-clock mr-1"></i> อ่าน 4 นาที</span>
+                            <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" class="text-sage-600 dark:text-sage-400 font-semibold hover:underline">อ่านต่อบน Facebook →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card bg-white dark:bg-warmdark-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-stone-200 dark:border-stone-800 flex flex-col">
+                    <div class="h-48 bg-stone-200 dark:bg-stone-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=600&q=80" alt="Mindfulness" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/5B8266/FFFFFF?text=ธรรมะ•ดา'">
+                        <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs px-2.5 py-1 rounded-full font-medium">การฝึกสติ</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="text-lg font-bold font-heading text-stone-900 dark:text-stone-100 hover:text-sage-600 transition-colors line-clamp-2">
+                                ฝึกมองโลกตามจริง โดยไม่ต้องแบก
+                            </h3>
+                            <p class="text-stone-600 dark:text-stone-400 text-xs sm:text-sm mt-2 line-clamp-3">
+                                บ่อยครั้งที่ความทุกข์ไม่ได้เกิดจากสิ่งที่เกิดขึ้น แต่เกิดจากความคิดของเราที่แบกรับความคาดหวังไว้เกินไป ศิลปะแห่งการปล่อยวางง่ายๆ ในชีวิตประจำวัน
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs text-stone-400">
+                            <span><i class="fa-regular fa-clock mr-1"></i> อ่าน 3 นาที</span>
+                            <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" class="text-sage-600 dark:text-sage-400 font-semibold hover:underline">อ่านต่อบน Facebook →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="article-card bg-white dark:bg-warmdark-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 border border-stone-200 dark:border-stone-800 flex flex-col">
+                    <div class="h-48 bg-stone-200 dark:bg-stone-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=600&q=80" alt="Peace" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/5B8266/FFFFFF?text=ธรรมะ•ดา'">
+                        <span class="absolute top-3 left-3 bg-sage-600 text-white text-xs px-2.5 py-1 rounded-full font-medium">ความสุขสงบ</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="text-lg font-bold font-heading text-stone-900 dark:text-stone-100 hover:text-sage-600 transition-colors line-clamp-2">
+                                ความสุขที่แท้จริง ไม่ได้อยู่ที่การได้ครอบครอง
+                            </h3>
+                            <p class="text-stone-600 dark:text-stone-400 text-xs sm:text-sm mt-2 line-clamp-3">
+                                ร่วมค้นหาความเบาสบายในใจที่เกิดจากการรู้จักพอ ความสุขที่แท้จริงไม่ใช่วัตถุภายนอก แต่คือความสงบภายในจิตใจที่ไม่ต้องไขว่คว้าตลอดเวลา
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs text-stone-400">
+                            <span><i class="fa-regular fa-clock mr-1"></i> อ่าน 5 นาที</span>
+                            <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" class="text-sage-600 dark:text-sage-400 font-semibold hover:underline">อ่านต่อบน Facebook →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Facebook Integration / Community Connect Section -->
+        <section id="contact" class="py-16 bg-cream-100 dark:bg-warmdark-800/80 transition-colors">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white dark:bg-warmdark-900 rounded-3xl p-8 sm:p-12 shadow-lg border border-stone-200 dark:border-stone-800 text-center relative overflow-hidden">
+                    
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl mx-auto flex items-center justify-center text-3xl shadow-md mb-6">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-bold font-heading text-stone-900 dark:text-stone-100">
+                        ร่วมติดตามและแบ่งปันข้อคิดดีๆ กับเพจ <span class="text-sage-600">ธรรมะ•ดา</span>
+                    </h2>
+                    <p class="text-stone-600 dark:text-stone-400 max-w-xl mx-auto mt-3 text-sm sm:text-base">
+                        กดติดตามเพจ Facebook เพื่อรับข้อคิดธรรมะเตือนใจ บทความสร้างพลังบวก และเรื่องราวดีๆ ในทุกๆ วัน
+                    </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-brands fa-facebook text-lg"></i>
+                            <span>ไปยังเพจ Facebook ธรรมะ•ดา</span>
+                        </a>
+                        <button id="btnSharePage" class="w-full sm:w-auto px-6 py-3.5 border border-stone-300 dark:border-stone-700 hover:bg-stone-100 dark:hover:bg-warmdark-800 text-stone-700 dark:text-stone-300 font-medium rounded-full transition-all flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-share-nodes"></i>
+                            <span>แชร์เว็บไซต์นี้</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-8 pt-6 border-t border-stone-100 dark:border-stone-800 flex items-center justify-center space-x-6 text-xs text-stone-400">
+                        <span><i class="fa-solid fa-users mr-1"></i> ชุมชนผู้สนใจธรรมะเรียบง่าย</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-heart text-red-400 mr-1"></i> แบ่งปันด้วยปัญญาและธรรมทาน</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-sage-900 text-stone-300 py-12 border-t border-sage-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-sage-500 text-white flex items-center justify-center font-bold text-base">
+                            ธ
+                        </div>
+                        <span class="text-lg font-bold font-heading text-white">ธรรมะ•ดา</span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        ธรรมะเรียบง่าย ในชีวิตประจำวัน <br>
+                        ส่งเสริมความเข้าใจในชีวิต สติ ความสงบ และการปล่อยวางอย่างมีปัญญา
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-semibold font-heading text-white mb-3">ลิงก์รวดเร็ว</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-white transition-colors">หน้าแรก</a></li>
+                        <li><a href="#quotes" class="hover:text-white transition-colors">ข้อคิดธรรมะ</a></li>
+                        <li><a href="#journal" class="hover:text-white transition-colors">บันทึกสติประจำวัน</a></li>
+                        <li><a href="#articles" class="hover:text-white transition-colors">บทความน่าอ่าน</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-semibold font-heading text-white mb-3">ติดตามเรา</h4>
+                    <p class="text-xs text-stone-400 mb-3">Facebook Official Page:</p>
+                    <a href="https://www.facebook.com/OrdinaryDhamma" target="_blank" class="inline-flex items-center space-x-2 text-xs bg-sage-800 hover:bg-sage-700 text-white px-3 py-2 rounded-lg transition-colors">
+                        <i class="fa-brands fa-facebook text-blue-400"></i>
+                        <span>facebook.com/OrdinaryDhamma</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-sage-800 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500">
+                <p>© <span id="currentYear"></span> ธรรมะ•ดา (Ordinary Dhamma) — จัดทำขึ้นเพื่อธรรมทานและการเรียนรู้</p>
+                <p class="mt-2 sm:mt-0">"ธรรมะที่แท้จริง อยู่ในชีวิตประจำวันของเราทุกคน"</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Box -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-stone-900 text-white text-xs sm:text-sm px-5 py-3 rounded-2xl shadow-xl z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-sage-400 text-base" id="toastIcon"></i>
+        <span id="toastMsg">คัดลอกข้อความเรียบร้อยแล้ว</span>
+    </div>
+
+    <!-- Application Logic Script -->
+    <script>
+        // Quotes Data Store
+        const dhammaQuotes = [
+            {
+                text: "สิ่งที่เกิดขึ้นแล้วดีเสมอ ไม่ใช่เพราะมันตรงใจเรา แต่เพราะมันมาเพื่อให้เราได้เรียนรู้และเติบโต",
+                author: "ธรรมะ•ดา",
+                category: "mindfulness"
+            },
+            {
+                text: "ความสุขไม่ได้เกิดจากการมีทุกอย่างที่อยากได้ แต่เกิดจากการหยุดอยากในสิ่งที่ไม่จำเป็น",
+                author: "ธรรมะ•ดา",
+                category: "happiness"
+            },
+            {
+                text: "อย่าแบกทุกอย่างไว้ด้วยความคาดหวัง ปล่อยให้สิ่งต่างๆ เป็นไปตามธรรมชาติ แล้วใจเราจะเบาลง",
+                author: "ธรรมะ•ดา",
+                category: "lettinggo"
+            },
+            {
+                text: "ความอดทนไม่ใช่การฝืนทนอย่างขมขื่น แต่คือการเข้าใจว่าทุกสิ่งมีเวลาและจังหวะของมัน",
+                author: "ธรรมะ•ดา",
+                category: "suffering"
+            },
+            {
+                text: "สติ คือการกลับมาอยู่กับปัจจุบันขณะ ไม่ดึงอดีตมาเสียดาย ไม่ดึงอนาคตมากังวล",
+                author: "ธรรมะ•ดา",
+                category: "mindfulness"
+            },
+            {
+                text: "เมื่อใจสงบ โลกภายนอกที่เคยยุ่งเหยิง ก็จะค่อยๆ สงบลงตามใจเรา",
+                author: "ธรรมะ•ดา",
+                category: "happiness"
+            },
+            {
+                text: "ไม่มีใครหลีกเลี่ยงความเปลี่ยนแปลงได้ การยอมรับความจริง คือจุดเริ่มต้นของความสงบสุข",
+                author: "ธรรมะ•ดา",
+                category: "lettinggo"
+            },
+            {
+                text: "การให้อภัยผู้อื่น ไม่ได้ทำเพื่อเปลี่ยนอดีตของเขา แต่ทำเพื่อปลดปล่อยอนาคตของเราเอง",
+                author: "ธรรมะ•ดา",
+                category: "suffering"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set Current Year & Date
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            const dateOpts = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('quoteDate').textContent = new Date().toLocaleDateString('th-TH', dateOpts);
+
+            // Setup Components
+            initThemeToggle();
+            initMobileMenu();
+            initQuoteGenerator();
+            renderQuotesGrid('all');
+            initCategoryFilters();
+            initMindfulnessJournal();
+            initSearchArticle();
+        });
+
+        // Theme Toggle Functionality
+        function initThemeToggle() {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                if (document.documentElement.classList.contains('dark')) {
+                    themeIcon.className = 'fa-solid fa-sun text-lg text-amber-400';
+                } else {
+                    themeIcon.className = 'fa-solid fa-moon text-lg text-stone-600';
+                }
+            });
+        }
+
+        // Mobile Navigation Toggle
+        function initMobileMenu() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const menu = document.getElementById('mobileMenu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => menu.classList.add('hidden'));
+            });
+        }
+
+        // Quote Generator
+        function initQuoteGenerator() {
+            const btnRandom = document.getElementById('btnRandomQuote');
+            const btnCopy = document.getElementById('btnCopyHeroQuote');
+            const btnShare = document.getElementById('btnShareHeroQuote');
+
+            btnRandom.addEventListener('click', () => {
+                const quoteContainer = document.getElementById('quoteContainer');
+                quoteContainer.style.opacity = '0';
+                
+                setTimeout(() => {
+                    let nextIndex = Math.floor(Math.random() * dhammaQuotes.length);
+                    const q = dhammaQuotes[nextIndex];
+                    quoteContainer.querySelector('blockquote').textContent = `"${q.text}"`;
+                    quoteContainer.style.opacity = '1';
+                }, 300);
+            });
+
+            btnCopy.addEventListener('click', () => {
+                const text = document.querySelector('#quoteContainer blockquote').textContent;
+                copyToClipboard(`${text} — เพจ ธรรมะ•ดา`);
+            });
+
+            btnShare.addEventListener('click', () => {
+                showToast("ลิงก์แชร์ข้อคิดถูกคัดลอกแล้ว");
+            });
+        }
+
+        // Render Quotes Grid
+        function renderQuotesGrid(category) {
+            const grid = document.getElementById('quotesGrid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' 
+                ? dhammaQuotes 
+                : dhammaQuotes.filter(q => q.category === category);
+
+            filtered.forEach((q) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white dark:bg-warmdark-900 rounded-2xl p-6 shadow-sm border border-stone-200 dark:border-stone-800 flex flex-col justify-between hover:shadow-md transition-all duration-300';
+                card.innerHTML = `
+                    <div>
+                        <div class="text-sage-500 mb-3 text-2xl"><i class="fa-solid fa-quote-left"></i></div>
+                        <p class="text-stone-800 dark:text-stone-200 text-sm sm:text-base leading-relaxed font-medium mb-4">
+                            "${q.text}"
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between text-xs">
+                        <span class="text-sage-600 dark:text-sage-400 font-semibold">— ${q.author}</span>
+                        <button onclick="copyToClipboard('${q.text} — ธรรมะ•ดา')" class="p-2 text-stone-400 hover:text-sage-600 transition-colors" title="คัดลอกข้อคิด">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Category Filter Buttons
+        function initCategoryFilters() {
+            const btns = document.querySelectorAll('.quote-cat-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btns.forEach(b => {
+                        b.className = 'quote-cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-stone-200 dark:bg-warmdark-800 text-stone-700 dark:text-stone-300 hover:bg-sage-100';
+                    });
+                    btn.className = 'quote-cat-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-sage-600 text-white shadow-sm';
+                    renderQuotesGrid(btn.getAttribute('data-category'));
+                });
+            });
+        }
+
+        // Mindfulness Journal Functionality
+        function initMindfulnessJournal() {
+            const moodBtns = document.querySelectorAll('.mood-btn');
+            let selectedMood = '';
+
+            moodBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    moodBtns.forEach(b => b.classList.remove('border-sage-500', 'bg-sage-50', 'dark:bg-sage-900/30'));
+                    btn.classList.add('border-sage-500', 'bg-sage-50', 'dark:bg-sage-900/30');
+                    selectedMood = btn.getAttribute('data-mood');
+                });
+            });
+
+            const btnSave = document.getElementById('btnSaveJournal');
+            btnSave.addEventListener('click', () => {
+                const intention = document.getElementById('intentionInput').value;
+                const savedMsg = document.getElementById('journalSavedMsg');
+
+                if (!selectedMood && !intention) {
+                    showToast("กรุณาเลือกสภาวะจิตใจหรือบันทึกเจตนาของคุณ");
+                    return;
+                }
+
+                const journalData = {
+                    date: new Date().toISOString(),
+                    mood: selectedMood,
+                    intention: intention
+                };
+                localStorage.setItem('ธรรมะดา_journal', JSON.stringify(journalData));
+
+                savedMsg.classList.remove('hidden');
+                showToast("บันทึกสติประจำวันเรียบร้อยแล้ว");
+            });
+        }
+
+        // Articles Search Filter
+        function initSearchArticle() {
+            const searchInput = document.getElementById('articleSearch');
+            const articles = document.querySelectorAll('.article-card');
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                articles.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(query)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+
+            document.getElementById('btnSharePage').addEventListener('click', () => {
+                copyToClipboard(window.location.href);
+            });
+        }
+
+        // Utility Functions
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast("คัดลอกข้อความเรียบร้อยแล้ว");
+            } catch (err) {
+                showToast("ไม่สามารถคัดลอกได้");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
